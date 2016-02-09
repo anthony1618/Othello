@@ -22,14 +22,19 @@ class GameScene: SKScene {
         background.size = CGSize(width: self.size.width, height: self.size.width)
         self.addChild(background)
         self.addChild(self.gameLayer)
-        
-        let sprite = SKSpriteNode(imageNamed:"disc_black_basic")
-        
-        sprite.xScale = 0.5
-        sprite.yScale = 0.5
-        sprite.position = CGPoint(x: 0.5, y: 0.5)
-        
-        self.addChild(sprite)
     }
     
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        for touch in touches {
+            let location = touch.locationInNode(self)
+            
+            let sprite = SKSpriteNode(imageNamed:"disc_black_basic")
+            
+            sprite.xScale = 0.5
+            sprite.yScale = 0.5
+            sprite.position = location
+            
+            self.addChild(sprite)
+        }
+    }
 }
