@@ -10,10 +10,21 @@ import UIKit
 import SpriteKit
 
 class ViewController: UIViewController {
+    
+    private var scene: GameScene!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+        //Viewの設定
+        let skView = self.view as! SKView
+        skView.multipleTouchEnabled = false
+        
+        self.scene = GameScene()
+        self.scene.size = CGSize(width: 375, height: 667)
+        self.scene.scaleMode = .AspectFit
+        
+        skView.presentScene(self.scene)
     }
 
     override func shouldAutorotate() -> Bool {

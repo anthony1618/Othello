@@ -7,3 +7,21 @@
 //
 
 import Foundation
+import SpriteKit
+
+class GameScene: SKScene {
+    
+    let gameLayer = SKNode()
+
+    override func didMoveToView(view: SKView) {
+        //基準点を中心に設定
+        super.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        
+        //背景の設定
+        let background = SKSpriteNode(imageNamed: "board")
+        background.size = CGSize(width: self.size.width, height: self.size.width)
+        self.addChild(background)
+        self.addChild(self.gameLayer)
+    }
+    
+}

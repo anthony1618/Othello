@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		46A14B2E1C6A2E6900083EC1 /* images.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 46A14B2D1C6A2E6900083EC1 /* images.atlas */; };
+		46A14B301C6A2EDE00083EC1 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A14B2F1C6A2EDE00083EC1 /* GameScene.swift */; };
 		46FF3DB91C676BBA0034764A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46FF3DB81C676BBA0034764A /* AppDelegate.swift */; };
 		46FF3DBB1C676BBA0034764A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46FF3DBA1C676BBA0034764A /* ViewController.swift */; };
 		46FF3DBE1C676BBA0034764A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46FF3DBC1C676BBA0034764A /* Main.storyboard */; };
@@ -34,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		46A14B2D1C6A2E6900083EC1 /* images.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = images.atlas; sourceTree = "<group>"; };
+		46A14B2F1C6A2EDE00083EC1 /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		46FF3DB51C676BBA0034764A /* Othello.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Othello.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46FF3DB81C676BBA0034764A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		46FF3DBA1C676BBA0034764A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -99,8 +103,10 @@
 			children = (
 				46FF3DB81C676BBA0034764A /* AppDelegate.swift */,
 				46FF3DBA1C676BBA0034764A /* ViewController.swift */,
+				46A14B2F1C6A2EDE00083EC1 /* GameScene.swift */,
 				46FF3DBC1C676BBA0034764A /* Main.storyboard */,
 				46FF3DBF1C676BBA0034764A /* Assets.xcassets */,
+				46A14B2D1C6A2E6900083EC1 /* images.atlas */,
 				46FF3DC11C676BBA0034764A /* LaunchScreen.storyboard */,
 				46FF3DC41C676BBA0034764A /* Info.plist */,
 			);
@@ -230,6 +236,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				46FF3DC31C676BBA0034764A /* LaunchScreen.storyboard in Resources */,
+				46A14B2E1C6A2E6900083EC1 /* images.atlas in Resources */,
 				46FF3DC01C676BBA0034764A /* Assets.xcassets in Resources */,
 				46FF3DBE1C676BBA0034764A /* Main.storyboard in Resources */,
 			);
@@ -256,6 +263,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46A14B301C6A2EDE00083EC1 /* GameScene.swift in Sources */,
 				46FF3DBB1C676BBA0034764A /* ViewController.swift in Sources */,
 				46FF3DB91C676BBA0034764A /* AppDelegate.swift in Sources */,
 			);
@@ -482,6 +490,7 @@
 				46FF3DDF1C676BBA0034764A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		46FF3DE01C676BBA0034764A /* Build configuration list for PBXNativeTarget "OthelloTests" */ = {
 			isa = XCConfigurationList;
@@ -490,6 +499,7 @@
 				46FF3DE21C676BBA0034764A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		46FF3DE31C676BBA0034764A /* Build configuration list for PBXNativeTarget "OthelloUITests" */ = {
 			isa = XCConfigurationList;
@@ -498,6 +508,7 @@
 				46FF3DE51C676BBA0034764A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
