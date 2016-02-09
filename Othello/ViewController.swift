@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SpriteKit
 
 class ViewController: UIViewController {
 
@@ -15,11 +16,24 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
     }
 
+    override func shouldAutorotate() -> Bool {
+        return true
+    }
+    
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
+            return .AllButUpsideDown
+        } else {
+            return .All
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-
-
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
 }
 
