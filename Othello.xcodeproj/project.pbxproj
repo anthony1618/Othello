@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		46A14B2E1C6A2E6900083EC1 /* images.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 46A14B2D1C6A2E6900083EC1 /* images.atlas */; };
 		46A14B301C6A2EDE00083EC1 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A14B2F1C6A2EDE00083EC1 /* GameScene.swift */; };
+		46A14B711C6A342B00083EC1 /* CellState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A14B701C6A342B00083EC1 /* CellState.swift */; };
 		46FF3DB91C676BBA0034764A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46FF3DB81C676BBA0034764A /* AppDelegate.swift */; };
 		46FF3DBB1C676BBA0034764A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46FF3DBA1C676BBA0034764A /* ViewController.swift */; };
 		46FF3DBE1C676BBA0034764A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46FF3DBC1C676BBA0034764A /* Main.storyboard */; };
@@ -38,6 +39,7 @@
 /* Begin PBXFileReference section */
 		46A14B2D1C6A2E6900083EC1 /* images.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = images.atlas; sourceTree = "<group>"; };
 		46A14B2F1C6A2EDE00083EC1 /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		46A14B701C6A342B00083EC1 /* CellState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellState.swift; sourceTree = "<group>"; };
 		46FF3DB51C676BBA0034764A /* Othello.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Othello.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46FF3DB81C676BBA0034764A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		46FF3DBA1C676BBA0034764A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -78,6 +80,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		46A14B6F1C6A341A00083EC1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				46A14B701C6A342B00083EC1 /* CellState.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		46FF3DAC1C676BBA0034764A = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +111,7 @@
 		46FF3DB71C676BBA0034764A /* Othello */ = {
 			isa = PBXGroup;
 			children = (
+				46A14B6F1C6A341A00083EC1 /* Model */,
 				46FF3DB81C676BBA0034764A /* AppDelegate.swift */,
 				46FF3DBA1C676BBA0034764A /* ViewController.swift */,
 				46A14B2F1C6A2EDE00083EC1 /* GameScene.swift */,
@@ -266,6 +277,7 @@
 				46A14B301C6A2EDE00083EC1 /* GameScene.swift in Sources */,
 				46FF3DBB1C676BBA0034764A /* ViewController.swift in Sources */,
 				46FF3DB91C676BBA0034764A /* AppDelegate.swift in Sources */,
+				46A14B711C6A342B00083EC1 /* CellState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
