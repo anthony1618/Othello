@@ -18,14 +18,41 @@ let DiskImageNames = [
     CellState.White : "disc_white_basic",
 ]
 
+extension SKLabelNode {
+    //スコア表示用のSKLabelNodeを生成する
+    class func createScoreLabel(x x: Int, y: Int) -> SKLabelNode {
+        let node = SKLabelNode(fontNamed: "Helveca")
+        node.position = CGPoint(x: x, y: y)
+        node.fontSize = 25
+        node.horizontalAlignmentMode = .Right
+        node.fontColor = UIColor.whiteColor()
+        return node
+    }
+    
+    class func createMessageLabel(x x: Int, y: Int) -> SKLabelNode {
+        let node = SKLabelNode(fontNamed: "Helveca")
+        node.position = CGPoint(x: x, y: y)
+        node.fontSize = 30
+        node.horizontalAlignmentMode = .Right
+        node.fontColor = UIColor.whiteColor()
+        return node
+    }
+}
+
+
+
 class GameScene: SKScene {
     
     let gameLayer = SKNode()
     let disksLayer = SKNode()
-
+    
     var diskNodes = Array2D<SKSpriteNode>(rows: BoardSize, columns: BoardSize)
     var board: Board!
     var nextColor: CellState!
+    
+    let blackScoreLabel = SKLabelNode.createScoreLabel(x: 10, y: -260)
+    let whiteScoreLabel = SKLabelNode.createScoreLabel(x: 10, y: -310)
+    let messageLabel = SKLabelNode.createMessageLabel(x: 30, y: 250)
     
     override func didMoveToView(view: SKView) {
         //基準点を中心に設定
@@ -43,6 +70,10 @@ class GameScene: SKScene {
             x: -SquareWidth * CGFloat(BoardSize) / 2,
             y: -SquareHeight * CGFloat(BoardSize) / 2
         )
+        
+        self.gameLayer.addChild(self.blackScoreLabel)
+        self.gameLayer.addChild(self.whiteScoreLabel)
+        self.gameLayer.addChild(self.messageLabel)
         
         self.disksLayer.position = layerPosition
         self.gameLayer.addChild(self.disksLayer)
@@ -96,6 +127,11 @@ class GameScene: SKScene {
                 }
             }
         }
+        
+        //スコアの表示
+        self.updateScores()
+        //メッセージの表示
+        self.updateMessage()
     }
     
     //盤上での座標をレイヤー上での座標に変換する
@@ -112,6 +148,22 @@ class GameScene: SKScene {
             return (Int(point.y / SquareHeight), Int(point.x / SquareWidth))
         } else {
             return nil
+        }
+    }
+    
+    //スコアを更新する
+    func updateScores() {
+        self.blackScoreLabel.text = "黒の枚数 : " + String(self.board.countCells(.Black))
+        self.whiteScoreLabel.text = "白の枚数 : " + String(self.board.countCells(.White))
+    }
+    
+    func updateMessage() {
+        if let color = self.nextColor {
+            if color == .Black {
+                self.messageLabel.text = "白のターンです"
+            } else {
+                self.messageLabel.text = "黒のターンです"
+            }
         }
     }
 }
