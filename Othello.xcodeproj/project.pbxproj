@@ -10,6 +10,9 @@
 		46A14B2E1C6A2E6900083EC1 /* images.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 46A14B2D1C6A2E6900083EC1 /* images.atlas */; };
 		46A14B301C6A2EDE00083EC1 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A14B2F1C6A2EDE00083EC1 /* GameScene.swift */; };
 		46A14B711C6A342B00083EC1 /* CellState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A14B701C6A342B00083EC1 /* CellState.swift */; };
+		46A14B731C6C2B2000083EC1 /* Move.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A14B721C6C2B2000083EC1 /* Move.swift */; };
+		46A14B751C6C2B7C00083EC1 /* Array2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A14B741C6C2B7C00083EC1 /* Array2D.swift */; };
+		46A14B771C6C2CBA00083EC1 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A14B761C6C2CBA00083EC1 /* Board.swift */; };
 		46FF3DB91C676BBA0034764A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46FF3DB81C676BBA0034764A /* AppDelegate.swift */; };
 		46FF3DBB1C676BBA0034764A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46FF3DBA1C676BBA0034764A /* ViewController.swift */; };
 		46FF3DBE1C676BBA0034764A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46FF3DBC1C676BBA0034764A /* Main.storyboard */; };
@@ -40,6 +43,9 @@
 		46A14B2D1C6A2E6900083EC1 /* images.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = images.atlas; sourceTree = "<group>"; };
 		46A14B2F1C6A2EDE00083EC1 /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		46A14B701C6A342B00083EC1 /* CellState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellState.swift; sourceTree = "<group>"; };
+		46A14B721C6C2B2000083EC1 /* Move.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Move.swift; sourceTree = "<group>"; };
+		46A14B741C6C2B7C00083EC1 /* Array2D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array2D.swift; sourceTree = "<group>"; };
+		46A14B761C6C2CBA00083EC1 /* Board.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		46FF3DB51C676BBA0034764A /* Othello.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Othello.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46FF3DB81C676BBA0034764A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		46FF3DBA1C676BBA0034764A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -84,6 +90,9 @@
 			isa = PBXGroup;
 			children = (
 				46A14B701C6A342B00083EC1 /* CellState.swift */,
+				46A14B721C6C2B2000083EC1 /* Move.swift */,
+				46A14B741C6C2B7C00083EC1 /* Array2D.swift */,
+				46A14B761C6C2CBA00083EC1 /* Board.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -113,8 +122,8 @@
 			children = (
 				46A14B6F1C6A341A00083EC1 /* Model */,
 				46FF3DB81C676BBA0034764A /* AppDelegate.swift */,
-				46FF3DBA1C676BBA0034764A /* ViewController.swift */,
 				46A14B2F1C6A2EDE00083EC1 /* GameScene.swift */,
+				46FF3DBA1C676BBA0034764A /* ViewController.swift */,
 				46FF3DBC1C676BBA0034764A /* Main.storyboard */,
 				46FF3DBF1C676BBA0034764A /* Assets.xcassets */,
 				46A14B2D1C6A2E6900083EC1 /* images.atlas */,
@@ -274,8 +283,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46A14B731C6C2B2000083EC1 /* Move.swift in Sources */,
+				46A14B751C6C2B7C00083EC1 /* Array2D.swift in Sources */,
 				46A14B301C6A2EDE00083EC1 /* GameScene.swift in Sources */,
 				46FF3DBB1C676BBA0034764A /* ViewController.swift in Sources */,
+				46A14B771C6C2CBA00083EC1 /* Board.swift in Sources */,
 				46FF3DB91C676BBA0034764A /* AppDelegate.swift in Sources */,
 				46A14B711C6A342B00083EC1 /* CellState.swift in Sources */,
 			);

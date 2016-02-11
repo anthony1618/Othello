@@ -25,6 +25,7 @@ class ViewController: UIViewController {
         self.scene.scaleMode = .AspectFit
         
         skView.presentScene(self.scene)
+        self.scene.initBoard()
     }
 
     override func shouldAutorotate() -> Bool {
