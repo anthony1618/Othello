@@ -66,6 +66,7 @@ class GameScene: SKScene {
     var switchTurnHandler: (() -> ())?
     var gameResultLayer: SKNode?
     var gameEndFlag = false
+    var resetBtn = UIButton()
     
     override func didMoveToView(view: SKView) {
         //基準点を中心に設定
@@ -90,6 +91,13 @@ class GameScene: SKScene {
         
         self.disksLayer.position = layerPosition
         self.gameLayer.addChild(self.disksLayer)
+        
+        resetBtn.frame = CGRectMake(10,55,120,40)
+        resetBtn.backgroundColor = UIColor.grayColor()
+        resetBtn.layer.cornerRadius = 20.0
+        resetBtn.setTitle("リスタート", forState: UIControlState.Normal)
+        resetBtn.addTarget(self, action: "onClickResetBtn:", forControlEvents: .TouchUpInside)
+        self.view!.addSubview(resetBtn);
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -254,6 +262,10 @@ class GameScene: SKScene {
         self.gameResultLayer?.removeFromParent()
         self.gameResultLayer = nil
         
+        self.restartGame()
+    }
+    
+    func onClickResetBtn(sender : UIButton) {
         self.restartGame()
     }
 }
