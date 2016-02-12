@@ -21,7 +21,7 @@ let DiskImageNames = [
 extension SKLabelNode {
     //スコア表示用のSKLabelNodeを生成する
     class func createScoreLabel(x x: Int, y: Int) -> SKLabelNode {
-        let node = SKLabelNode(fontNamed: "Helveca")
+        let node = SKLabelNode(fontNamed: "Helvetica")
         node.position = CGPoint(x: x, y: y)
         node.fontSize = 25
         node.horizontalAlignmentMode = .Right
@@ -30,11 +30,19 @@ extension SKLabelNode {
     }
     
     class func createMessageLabel(x x: Int, y: Int) -> SKLabelNode {
-        let node = SKLabelNode(fontNamed: "Helveca")
+        let node = SKLabelNode(fontNamed: "Helvetica")
         node.position = CGPoint(x: x, y: y)
-        node.fontSize = 30
-        node.horizontalAlignmentMode = .Right
+        node.fontSize = 25
+        node.horizontalAlignmentMode = .Center
         node.fontColor = UIColor.whiteColor()
+        return node
+    }
+    class func createResultLabel(x x: Int, y: Int) -> SKLabelNode {
+        let node = SKLabelNode(fontNamed: "Helvetica")
+        node.position = CGPoint(x: x, y: y)
+        node.fontSize = 25
+        node.horizontalAlignmentMode = .Center
+        node.fontColor = UIColor.redColor()
         return node
     }
 }
@@ -52,7 +60,11 @@ class GameScene: SKScene {
     
     let blackScoreLabel = SKLabelNode.createScoreLabel(x: 10, y: -260)
     let whiteScoreLabel = SKLabelNode.createScoreLabel(x: 10, y: -310)
-    let messageLabel = SKLabelNode.createMessageLabel(x: 30, y: 250)
+    let messageLabel = SKLabelNode.createMessageLabel(x: 70, y: 250)
+    var resultLabel = SKLabelNode.createResultLabel(x: 50, y: 0)
+    
+    var switchTurnHandler: (() -> ())?
+    var gameResultLayer: SKNode?
     
     override func didMoveToView(view: SKView) {
         //基準点を中心に設定
@@ -90,7 +102,23 @@ class GameScene: SKScene {
             if move.canPlace(self.board.cells) {
                 self.board.makeMove(move)
                 self.updateDiskNodes()
+                
+                //ゲームの終了を判定
+                if self.board.hasGameFinished() {
+                    print("ゲーム終了")
+                    self.showGameResult()
+                }
+                
                 self.nextColor = self.nextColor.opponent
+            } else {
+                self.messageLabel.text = " そこには置けません！"
+                
+                //おけない場合はパスする
+                if let state = self.nextColor {
+                    if self.board.hasTurnPassed(state) {
+                        self.nextColor = self.nextColor.opponent
+                    }
+                }
             }
         }
     }
@@ -166,4 +194,59 @@ class GameScene: SKScene {
             }
         }
     }
+    
+    //リザルト画面を表示する
+    func showGameResult() {
+        let black = self.board.countCells(.Black)
+        let white = self.board.countCells(.White)
+        
+        if white < black {
+            resultLabel.text = "黒の勝ち！"
+        } else if (black < white) {
+            resultLabel.text = "白の勝ち！"
+        } else {
+            resultLabel.text = "引き分け！"
+        }
+        
+        resultLabel.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMidY(self.frame))
+        
+        let gameResultLayer = GameResultLayer()
+        gameResultLayer.userInteractionEnabled = true
+        gameResultLayer.touchHandler = self.hideGameResult
+        gameResultLayer.addChild(resultLabel)
+        
+        //        self.gameResultLayer = gameResultLayer
+        self.addChild(self.gameResultLayer!)
+    }
+    
+    //ゲームをリスタートする
+    func restartGame() {
+        for row in 0..<BoardSize {
+            for column in 0..<BoardSize {
+                if let diskNode = self.diskNodes[row, column] {
+                    diskNode.removeFromParent()
+                    self.diskNodes[row, column] = nil
+                }
+            }
+        }
+        
+        self.initBoard()
+    }
+    
+    //リザルト画面を非表示にする
+    func hideGameResult() {
+        self.gameResultLayer?.removeFromParent()
+        self.gameResultLayer = nil
+        
+        self.restartGame()
+    }
 }
+
+class GameResultLayer: SKNode {
+    var touchHandler: (() -> ())?
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        touchHandler?()
+    }
+}
+

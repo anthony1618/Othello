@@ -86,6 +86,11 @@ class Board: CustomStringConvertible {
         return count
     }
     
+    // 打つ手がない場合、trueを返す
+    func hasTurnPassed(state: CellState) -> Bool {
+        return self.existsValidMove(state) == false
+    }
+    
     //ゲームが終了した場合、trueを返す
     func hasGameFinished() -> Bool {
         return self.existsValidMove(.Black) == false && self.existsValidMove(.White) == false
