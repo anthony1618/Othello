@@ -12,6 +12,7 @@ import SpriteKit
 class ViewController: UIViewController {
     
     private var scene: GameScene!
+    var computer: ComputerPlayer!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,11 +22,35 @@ class ViewController: UIViewController {
         skView.multipleTouchEnabled = false
         
         self.scene = GameScene()
+        
         self.scene.size = CGSize(width: 375, height: 667)
         self.scene.scaleMode = .AspectFit
         
         skView.presentScene(self.scene)
+        let evaluate = countColor
+        let maxDepth = 2
+        let search = MiniMaxMethod(evaluate: evaluate, maxDepth: maxDepth)
+        self.computer = ComputerPlayer(color: .White, search: search)
+        
+        self.scene.switchTurnHandler = self.switchTurn
         self.scene.initBoard()
+    }
+    
+    func switchTurn() {
+        if self.scene.nextColor == self.computer.color {
+            self.scene.userInteractionEnabled = false
+            NSTimer.scheduledTimerWithTimeInterval(1.2, target: self, selector: "makeMoveByComputer", userInfo: nil, repeats: false)
+        }
+    }
+    
+    func makeMoveByComputer() {
+        let nextMove = self.computer.selectMove(self.scene.board!)
+        self.scene.makeMove(nextMove)
+        
+        if self.scene.board.hasGameFinished() == false && self.scene.board.existsValidMove(self.computer.color.opponent) == false {
+            self.makeMoveByComputer()
+        }
+        self.scene.userInteractionEnabled = true
     }
 
     override func shouldAutorotate() -> Bool {

@@ -108,4 +108,26 @@ class Board: CustomStringConvertible {
         }
         return false
     }
+    
+    func getValidMoves(color: CellState) -> [Move] {
+        var moves = Array<Move>()
+        for row in 0..<BoardSize {
+            for column in 0..<BoardSize {
+                let move = Move(color: color, row: row, column: column)
+                if move.canPlace(self.cells) {
+                    moves.append(move)
+                }
+            }
+        }
+        
+        return moves
+    }
+    
+    init(cells: Array2D<CellState>) {
+        self.cells = cells
+    }
+    
+    func clone() -> Board {
+        return Board(cells: self.cells)
+    }
 }

@@ -105,7 +105,7 @@ class GameScene: SKScene {
         let location = touch.locationInNode(self.disksLayer)
         
         //ゲームをリセットする
-        if gameEndFlag == true {
+        if self.board.hasGameFinished() == true {
             gameEndFlag = false
             hideGameResult()
             self.messageLabel.text = "黒のターンです"
@@ -116,32 +116,38 @@ class GameScene: SKScene {
                 let move = Move(color: self.nextColor, row: row, column: column)
                 
                 if move.canPlace(self.board.cells) {
-                    self.board.makeMove(move)
-                    self.updateDiskNodes()
+                    //self.board.makeMove(move)
+                    self.makeMove(move)
                     
-                    //ゲームの終了を判定
-                    if self.board.hasGameFinished() == true {
-                        print("ゲーム終了")
-                        self.showGameResult()
-                        gameEndFlag = true
+                    if self.board.hasGameFinished() == false {
+                        self.switchTurnHandler?()
                     }
                     
-                    self.nextColor = self.nextColor.opponent
-                    
-                    //おけない場合はパスする
-                    if let state = self.nextColor {
-                        if self.board.hasTurnPassed(state) {
-                            self.nextColor = self.nextColor.opponent
-                            
-                            if state == .Black {
-                                self.messageLabel.text = "白のターンです"
-                            } else {
-                                self.messageLabel.text = "黒のターンです"
-                            }
-                        }
-                    }
-                } else {
-                    self.messageLabel.text = "そこには置けません！ "
+                    //                    self.updateDiskNodes()
+                    //
+                    //                    //ゲームの終了を判定
+                    //                    if self.board.hasGameFinished() == true {
+                    //                        print("ゲーム終了")
+                    //                        self.showGameResult()
+                    //                        gameEndFlag = true
+                    //                    }
+                    //
+                    //                    self.nextColor = self.nextColor.opponent
+                    //
+                    //                    //おけない場合はパスする
+                    //                    if let state = self.nextColor {
+                    //                        if self.board.hasTurnPassed(state) {
+                    //                            self.nextColor = self.nextColor.opponent
+                    //
+                    //                            if state == .Black {
+                    //                                self.messageLabel.text = "白のターンです"
+                    //                            } else {
+                    //                                self.messageLabel.text = "黒のターンです"
+                    //                            }
+                    //                        }
+                    //                    }
+                    //                } else {
+                    //                    self.messageLabel.text = "そこには置けません！ "
                 }
             }
         }
@@ -267,6 +273,26 @@ class GameScene: SKScene {
     
     func onClickResetBtn(sender : UIButton) {
         self.restartGame()
+        self.hideGameResult()
+    }
+    
+    func makeMove(move: Move?) {
+        if move != nil {
+            self.board.makeMove(move!)
+        }
+        self.nextColor = self.nextColor.opponent
+        self.updateDiskNodes()
+        
+        //おけない場合はパスする
+        if let state = self.nextColor {
+            if self.board.hasTurnPassed(state.opponent) == true {
+                self.messageLabel.text = "黒のターンです"
+            }
+        }
+        
+        if self.board.hasGameFinished() {
+            self.showGameResult()
+        }
     }
 }
 
