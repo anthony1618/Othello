@@ -65,6 +65,7 @@ class GameScene: SKScene {
     
     var switchTurnHandler: (() -> ())?
     var gameResultLayer: SKNode?
+    var gameEndFlag = false
     
     override func didMoveToView(view: SKView) {
         //基準点を中心に設定
@@ -95,29 +96,44 @@ class GameScene: SKScene {
         let touch = touches.first! as UITouch
         let location = touch.locationInNode(self.disksLayer)
         
-        if let (row, column) = self.convertPointOnBoard(location) {
+        //ゲームをリセットする
+        if gameEndFlag == true {
+            gameEndFlag = false
+            hideGameResult()
+            self.messageLabel.text = "黒のターンです"
+        } else {
             
-            let move = Move(color: self.nextColor, row: row, column: column)
-            
-            if move.canPlace(self.board.cells) {
-                self.board.makeMove(move)
-                self.updateDiskNodes()
+            if let (row, column) = self.convertPointOnBoard(location) {
                 
-                //ゲームの終了を判定
-                if self.board.hasGameFinished() {
-                    print("ゲーム終了")
-                    self.showGameResult()
-                }
+                let move = Move(color: self.nextColor, row: row, column: column)
                 
-                self.nextColor = self.nextColor.opponent
-            } else {
-                self.messageLabel.text = " そこには置けません！"
-                
-                //おけない場合はパスする
-                if let state = self.nextColor {
-                    if self.board.hasTurnPassed(state) {
-                        self.nextColor = self.nextColor.opponent
+                if move.canPlace(self.board.cells) {
+                    self.board.makeMove(move)
+                    self.updateDiskNodes()
+                    
+                    //ゲームの終了を判定
+                    if self.board.hasGameFinished() == true {
+                        print("ゲーム終了")
+                        self.showGameResult()
+                        gameEndFlag = true
                     }
+                    
+                    self.nextColor = self.nextColor.opponent
+                    
+                    //おけない場合はパスする
+                    if let state = self.nextColor {
+                        if self.board.hasTurnPassed(state) {
+                            self.nextColor = self.nextColor.opponent
+                            
+                            if state == .Black {
+                                self.messageLabel.text = "白のターンです"
+                            } else {
+                                self.messageLabel.text = "黒のターンです"
+                            }
+                        }
+                    }
+                } else {
+                    self.messageLabel.text = "そこには置けません！ "
                 }
             }
         }
@@ -215,7 +231,7 @@ class GameScene: SKScene {
         gameResultLayer.touchHandler = self.hideGameResult
         gameResultLayer.addChild(resultLabel)
         
-        //        self.gameResultLayer = gameResultLayer
+        self.gameResultLayer = gameResultLayer
         self.addChild(self.gameResultLayer!)
     }
     
