@@ -1,6 +1,12 @@
 # Othello
 オセロゲーム課題
 
+## 動作環境
+- Xcode7.2.1
+- Swift2.1
+- iPhone6s
+- iOS 7.0 and later
+
 ## 要件
 Swift1Day採点表参照
 
